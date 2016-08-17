@@ -11,7 +11,7 @@
               "[r(webpack)].optimize.UglifyJsPlugin.[i()]"
             ],
             "entry" : {
-              "bbv.min" : "./lib"
+              "bbv" : "./lib"
             },
             "module" : {
               "loaders" : [
@@ -22,7 +22,7 @@
               "extensions": ["", ".web.coffee", ".web.js", ".coffee", ".js"]
             },
             "output": {
-              "filename": "[name].js"
+              "filename": "[name].min.js"
             },
             "node": {
               "fs": "empty"
