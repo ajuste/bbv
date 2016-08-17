@@ -1,3 +1,1 @@
-module.exports =
-
-  webpackDest: (config) -> (file) -> 'build/'
+module.exports = webpackDest: (config) -> (file) -> 'build/'

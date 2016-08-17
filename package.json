@@ -2,7 +2,7 @@
   "name": "bbv",
   "version": "0.0.1",
   "description": "Backbone validation",
-  "main": "index.js",
+  "main": "./lib",
   "scripts": {
     "test": "npm test",
     "prepublish": "make compile"

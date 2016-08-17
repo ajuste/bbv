@@ -11,7 +11,7 @@
               "[r(webpack)].optimize.UglifyJsPlugin.[i()]"
             ],
             "entry" : {
-              "bbv.min" : "./index.js"
+              "bbv.min" : "./lib"
             },
             "module" : {
               "loaders" : [
