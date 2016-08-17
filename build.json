@@ -1,0 +1,35 @@
+{
+  "jaune" : {
+    "build_tasks" : {
+      "build" : [
+        {
+          "name" : "webpack",
+          "destFunction" : "[r(/tasks/app-funcs)].webpackDest",
+          "flatten" : true,
+          "args" : {
+            "plugins": [
+              "[r(webpack)].optimize.UglifyJsPlugin.[i()]"
+            ],
+            "entry" : {
+              "bbv.min" : "./index.js"
+            },
+            "module" : {
+              "loaders" : [
+                { "test": "\\.coffee$", "loader": "coffee" }
+              ]
+            },
+            "resolve": {
+              "extensions": ["", ".web.coffee", ".web.js", ".coffee", ".js"]
+            },
+            "output": {
+              "filename": "[name].js"
+            },
+            "node": {
+              "fs": "empty"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
