@@ -42,7 +42,7 @@ module.exports = ({Model, View}) ->
     required: ->
       (value) ->
         unless value and ((isStr(value) and value.trim().length) or (isNmb(value) and not isNaN(value)) or (isObj(value)))
-          return 'errors.required'
+          'errors.required'
 
     ###*
     * @function Validates email field
@@ -50,8 +50,8 @@ module.exports = ({Model, View}) ->
     ###
     email: ->
       (value) ->
-        unless isStr(value) and RxEmail.test(value)
-          'errors.email'
+        'errors.email' unless RxEmail.test(value)
+
 
 
   MProto =
