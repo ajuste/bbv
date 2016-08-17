@@ -1,10 +1,11 @@
 {
   "name": "bbv",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Backbone validation",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "prepublish": "make compile"
   },
   "keywords": [
     "backbone",
@@ -20,5 +21,8 @@
     "gulp-stylus": "^2.5.0",
     "gulp-webpack": "^1.5.0",
     "webpack": "^1.13.1"
+  },
+  "dependencies": {
+    "jaune-tasks": "0.0.1"
   }
 }
