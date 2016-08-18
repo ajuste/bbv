@@ -33,7 +33,7 @@ module.exports = ({Model, View}) ->
     maxLength: ([length]) ->
       (value) ->
         unless not value or isStr(value) and value.trim().length <= length
-          'errors.maxLength'
+          'maxLength'
 
     ###*
     * @function Validates value is available
@@ -42,7 +42,7 @@ module.exports = ({Model, View}) ->
     required: ->
       (value) ->
         unless value and ((isStr(value) and value.trim().length) or (isNmb(value) and not isNaN(value)) or (isObj(value)))
-          'errors.required'
+          'required'
 
     ###*
     * @function Validates email field
@@ -50,7 +50,7 @@ module.exports = ({Model, View}) ->
     ###
     email: ->
       (value) ->
-        'errors.email' unless RxEmail.test(value)
+        'email' unless RxEmail.test(value)
 
 
 
