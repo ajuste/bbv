@@ -71,7 +71,7 @@ module.exports = ({Model, View}) ->
 
     validate: (opts = {}) ->
 
-      changedAttributes = @changedAttributes()
+      changedAttributes = @changedAttributes() or {}
       result = {}
 
       @validations
