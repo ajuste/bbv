@@ -16,4 +16,4 @@ compile:
 
 # Build bundle
 build: compile
-	gulp build
+	./node_modules/.bin/gulp build

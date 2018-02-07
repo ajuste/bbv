@@ -76,7 +76,7 @@ module.exports = ({Model, View}) ->
 
       @validations
 
-        .reduce (memo, arr) -> memo.concat arr, []
+        .reduce ((memo, arr) -> memo.concat arr), []
 
         .filter ({name}) -> opts.validateAll or name of changedAttributes
 
