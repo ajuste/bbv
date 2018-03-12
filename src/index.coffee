@@ -123,7 +123,7 @@ module.exports = ({Model, View}) ->
 
       Array
 
-        ::concat @$el.find "[#{ErrorKeyAttribute}]"
+        ::concat @$el.find("[#{ErrorKeyAttribute}]").toArray()
 
         .map ($el) ->
           [$el, error[(key = $el.getAttribute ErrorKeyAttribute)], key]
