@@ -13,8 +13,6 @@ module.exports = ({Model, View}) ->
       obj[prop] = value
     obj
 
-  RxEmail =  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
   Vlds =
     ###*
     * @function Evaluates a function in the model to decide if model is valid
@@ -33,7 +31,7 @@ module.exports = ({Model, View}) ->
     maxLength: ([length]) ->
       (value) ->
         unless not value or isStr(value) and value.trim().length <= length
-          'maxLength'
+          {key: 'maxLength'}
 
     ###*
     * @function Validates value is available
@@ -42,7 +40,7 @@ module.exports = ({Model, View}) ->
     required: ->
       (value) ->
         unless value and ((isStr(value) and value.trim().length) or (isNmb(value) and not isNaN(value)) or (isObj(value)))
-          'required'
+          {key: 'required'}
 
     ###*
     * @function Validates email field
@@ -50,9 +48,24 @@ module.exports = ({Model, View}) ->
     ###
     email: ->
       (value) ->
-        'email' unless RxEmail.test(value)
+        {key: 'email'} if value and not /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
 
 
+    ###*
+    * @function Validates entered number is valid
+    * @returns  {String} Error key or undefined if valid
+    ###
+    number: ([args]) ->
+      {integer, min, max} = args if args
+      (value) ->
+        return unless value
+        return {key: 'number', args} unless /^\-{0,1}\d*(\.|\,){0,1}\d+$/.test value
+
+        num = Number(value)
+
+        return {key: 'number_integer', args} if integer is yes and num isnt parseInt(value)
+        return {key: 'number_min', args} if typeof min is 'number' and num < min
+        return {key: 'number_max', args} if typeof max is 'number' and num > max
 
   MProto =
 
@@ -89,13 +102,14 @@ module.exports = ({Model, View}) ->
 
             # if there is a validation for the same field with more prio
             # then don't validate current
-            if (not last or last.name isnt name or last.prio is prio) and (key = fn @get name, this)
-              memo.push {key, name, prio, fn}
+            if (not last or last.name isnt name or last.prio is prio) and (val = fn @get name, this)
+              {key, args} = val
+              memo.push {key, args, name, prio, fn}
 
             memo
         , []
 
-        .forEach ({name, key}) -> result[name] = key
+        .forEach ({name, key, args}) -> result[name] = {key, args}
 
       if keys(result).length then result
 
