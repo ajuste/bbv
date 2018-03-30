@@ -39,7 +39,7 @@ module.exports = ({Model, View}) ->
     ###
     required: ->
       (value) ->
-        unless value and ((isStr(value) and value.trim().length) or (isNmb(value) and not isNaN(value)) or (isObj(value)))
+        unless value and ((isStr(value) and value.trim().length) or (isNmb(value) and not isNaN(value)) or (isArr(value) and value.length > 0) or (not isArr(value) and isObj(value)))
           {key: 'required'}
 
     ###*
